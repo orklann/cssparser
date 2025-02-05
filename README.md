@@ -1,6 +1,6 @@
 # css_parser
 
-TODO: Write a description here
+This parser is based on the [CSS 2.1 specification](https://www.w3.org/TR/CSS2/)
 
 ## Installation
 
