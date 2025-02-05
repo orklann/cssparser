@@ -1,0 +1,9 @@
+name: css_parser
+version: 0.1.0
+
+authors:
+  - Tommy Jeff <threcius@yahoo.com>
+
+crystal: '>= 1.15.0'
+
+license: MIT
