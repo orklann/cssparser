@@ -1,4 +1,4 @@
-# css_parser
+# cssparser
 
 This parser is based on the [CSS 2.1 specification](https://www.w3.org/TR/CSS2/)
 
