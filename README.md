@@ -22,4 +22,4 @@ require "css_parser"
 
 ## Contributors
 
-- [Tommy Jeff](https://github.com/orklann) - creator and maintainer
+- [Tommy Jeff](https://github.com/orklann)
