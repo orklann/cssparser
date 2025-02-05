@@ -6,4 +6,6 @@ describe CssParser do
   it "works" do
     false.should eq(false)
   end
+
+  pending "It should be more tests coming up..."
 end
