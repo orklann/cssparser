@@ -1,2 +1,2 @@
 require "spec"
-require "../src/css_parser"
+require "../src/cssparser"

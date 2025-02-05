@@ -8,8 +8,8 @@ This parser is based on the [CSS 2.1 specification](https://www.w3.org/TR/CSS2/)
 
    ```yaml
    dependencies:
-     css_parser:
-       github: orklann/css_parser
+     cssparser:
+       github: orklann/cssparser
    ```
 
 2. Run `shards install`
@@ -17,7 +17,7 @@ This parser is based on the [CSS 2.1 specification](https://www.w3.org/TR/CSS2/)
 ## Usage
 
 ```crystal
-require "css_parser"
+require "cssparser"
 ```
 
 ## Contributors
