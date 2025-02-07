@@ -1,4 +1,5 @@
-# TODO: Write documentation for `CssParser`
+require "./token.cr"
+
 module CssParser
   VERSION = "0.1.0"
 
