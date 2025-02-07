@@ -15,11 +15,11 @@ module CssParser
       if char == '_' || (char >= 'a' && char <= 'z')
         next_char
       else
-        pos = current_pos
+        start_pos = current_pos
         begin
           match_nonascii
         rescue
-          set_current_pos(pos)
+          set_current_pos(start_pos)
           begin
             match_escape
           rescue
@@ -39,11 +39,11 @@ module CssParser
     end
 
     def match_escape
-      pos = current_pos
+      start_pos = current_pos
       begin
         match_unicode
       rescue
-        set_current_pos(pos)
+        set_current_pos(start_pos)
         char = current_char
         if char == '\\'
           char = next_char
