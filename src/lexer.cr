@@ -18,7 +18,7 @@ module CssParser
         pos = current_pos
         begin
           match_nonascii
-        rescue ex : Exception
+        rescue
           set_current_pos(pos)
           begin
             match_escape
@@ -42,7 +42,7 @@ module CssParser
       pos = current_pos
       begin
         match_unicode
-      rescue ex : Exception
+      rescue
         set_current_pos(pos)
         char = current_char
         if char == '\\'
