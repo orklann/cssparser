@@ -95,6 +95,7 @@ module CssParser
         return false
       end
     end
+
     def next_token
 
     end
