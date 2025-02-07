@@ -32,16 +32,22 @@ module CssParser
     it "match unicodes" do
       lexer = Lexer.new("\\01")
       lexer.match_unicode
+
       lexer = Lexer.new("\\01afaf")
       lexer.match_unicode
+
       lexer = Lexer.new("\\01afaf\r\n")
       lexer.match_unicode
+
       lexer = Lexer.new("\\01afaf\n")
       lexer.match_unicode
+
       lexer = Lexer.new("\\01afaf ")
       lexer.match_unicode
+
       lexer = Lexer.new("\\01afaf\t")
       lexer.match_unicode
+
       lexer = Lexer.new("\\01afaf\f")
       lexer.match_unicode
 
