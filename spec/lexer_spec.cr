@@ -2,7 +2,7 @@ require "./spec_helper.cr"
 
 module CssParser
   describe Lexer do
-    it "get next char" do
+    it "gets next char" do
       lexer = Lexer.new("div {}")
       char = lexer.current_char
       char.should eq('d')
