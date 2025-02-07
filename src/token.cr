@@ -5,8 +5,8 @@ module CssParser
       EOF
     end
 
-    @type : Kind
-    @value : String | Nil
+    property type : Kind
+    property value : String | Nil
 
     def initialize
       @type = Kind::EOF
