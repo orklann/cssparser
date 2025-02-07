@@ -20,9 +20,22 @@ module CssParser
 
     end
 
-    # Match macro escape
     def match_escape
-
+      pos = current_pos
+      begin
+        match_unicode
+      rescue ex : Exception
+        set_current_pos(pos)
+        char = current_char
+        if char == '\\'
+          char = next_char
+          if !char.in?("\n\r\f0123456789abcdef")
+            next_char
+          end
+        else
+          raise "match escape macro failed"
+        end
+      end
     end
 
     def match_unicode
@@ -78,6 +91,10 @@ module CssParser
 
     def current_pos
       @reader.pos
+    end
+
+    def set_current_pos(pos)
+      @reader.pos = pos
     end
 
     def string_range(start_pos, end_pos)

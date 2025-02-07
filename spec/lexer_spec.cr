@@ -61,5 +61,18 @@ module CssParser
         lexer.match_unicode
       end
     end
+
+    it "match escape" do
+      lexer = Lexer.new("\\01afaf")
+      lexer.match_escape
+
+      lexer = Lexer.new("\\z")
+      lexer.match_escape
+
+      expect_raises(Exception, "") do
+        lexer = Lexer.new("abc")
+        lexer.match_escape
+      end
+    end
   end
 end
