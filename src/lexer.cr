@@ -21,5 +21,17 @@ module CssParser
     def next_char
       @reader.next_char
     end
+
+    def current_pos
+      @reader.pos
+    end
+
+    def string_range(start_pos, end_pos)
+      @reader.string.byte_slice(start_pos, end_pos - start_pos)
+    end
+
+    def string_range(start_pos)
+      string_range(start_pos, current_pos)
+    end
   end
 end
