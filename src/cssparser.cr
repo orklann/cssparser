@@ -1,3 +1,4 @@
+require "./lexer"
 require "./token.cr"
 
 module CssParser
