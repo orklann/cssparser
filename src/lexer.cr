@@ -15,9 +15,13 @@ module CssParser
 
     end
 
-    # Match macro nonascii
     def match_nonascii
-
+      char = current_char
+      if !char.ord.in?(0..0x9f)
+        next_char
+      else
+        raise "match nonascii macro failed"
+      end
     end
 
     def match_escape

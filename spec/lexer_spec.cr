@@ -74,5 +74,18 @@ module CssParser
         lexer.match_escape
       end
     end
+
+    it "match nonascii" do
+      lexer = Lexer.new("\xa0")
+      lexer.match_nonascii
+
+      lexer = Lexer.new("世界")
+      lexer.match_nonascii
+
+      expect_raises(Exception, "") do
+        lexer = Lexer.new("a")
+        lexer.match_nonascii
+      end
+    end
   end
 end
