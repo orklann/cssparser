@@ -87,5 +87,26 @@ module CssParser
         lexer.match_nonascii
       end
     end
+
+    it "match nmstart" do
+      lexer = Lexer.new("_abc")
+      lexer.match_nmstart
+
+      lexer = Lexer.new("世界")
+      lexer.match_nmstart
+
+      lexer = Lexer.new("\\01afaf")
+      lexer.match_nmstart
+
+      expect_raises(Exception, "") do
+        lexer = Lexer.new("\r")
+        lexer.match_nmstart
+      end
+
+      expect_raises(Exception, "") do
+        lexer = Lexer.new("ABC")
+        lexer.match_nmstart
+      end
+    end
   end
 end
