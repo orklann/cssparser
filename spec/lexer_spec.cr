@@ -138,5 +138,12 @@ module CssParser
       token.type.should eq(Token::Kind::IDENT)
       token.value.should eq("-name")
     end
+
+    it "return ATKEYWORD token" do
+      lexer = Lexer.new("@-name")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::ATKEYWORD)
+      token.value.should eq("@-name")
+    end
   end
 end

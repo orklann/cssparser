@@ -120,8 +120,7 @@ module CssParser
       end
     end
 
-    def next_token
-      start_pos = current_pos
+    def scan_ident
       char = current_char
       if char == '-'
         next_char
@@ -132,8 +131,29 @@ module CssParser
           match_nmchar
         end
         @token.type = :IDENT
+      end
+    end
+
+    def scan_at_keyword
+      char = current_char
+      if char == '@'
+        next_char
+      end
+      scan_ident
+      @token.type = :ATKEYWORD
+    end
+
+    def next_token
+      start_pos = current_pos
+      char = current_char
+
+      case char
+      when '-'
+        scan_ident
         @token.value = string_range(start_pos)
-        return @token
+      when '@'
+        scan_at_keyword
+        @token.value = string_range(start_pos)
       end
       @token
     end

@@ -2,6 +2,7 @@ module CssParser
   class Token
     enum Kind
       IDENT
+      ATKEYWORD
       EOF
     end
 
