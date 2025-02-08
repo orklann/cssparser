@@ -131,5 +131,12 @@ module CssParser
       lexer = Lexer.new("A")
       lexer.match_nmchar.should be_false
     end
+
+    it "return IDENT token" do
+      lexer = Lexer.new("-name")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::IDENT)
+      token.value.should eq("-name")
+    end
   end
 end

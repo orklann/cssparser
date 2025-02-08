@@ -121,7 +121,21 @@ module CssParser
     end
 
     def next_token
+      start_pos = current_pos
+      char = current_char
+      if char == '-'
+        next_char
+      end
 
+      if match_nmstart
+        while current_char != '\0'
+          match_nmchar
+        end
+        @token.type = :IDENT
+        @token.value = string_range(start_pos)
+        return @token
+      end
+      @token
     end
 
     def current_char
