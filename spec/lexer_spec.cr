@@ -108,5 +108,42 @@ module CssParser
         lexer.match_nmstart
       end
     end
+
+    it "match nmchar" do
+      lexer = Lexer.new("a")
+      lexer.match_nmchar
+
+      lexer = Lexer.new("z")
+      lexer.match_nmchar
+
+      lexer = Lexer.new("f")
+      lexer.match_nmchar
+
+      lexer = Lexer.new("0")
+      lexer.match_nmchar
+
+      lexer = Lexer.new("9")
+      lexer.match_nmchar
+
+      lexer = Lexer.new("5")
+      lexer.match_nmchar
+
+      lexer = Lexer.new("_")
+      lexer.match_nmchar
+
+      lexer = Lexer.new("-")
+      lexer.match_nmchar
+
+      lexer = Lexer.new("世界")
+      lexer.match_nmchar
+
+      lexer = Lexer.new("\\z")
+      lexer.match_nmchar
+
+      expect_raises(Exception, "") do
+        lexer = Lexer.new("A")
+        lexer.match_nmchar
+      end
+    end
   end
 end

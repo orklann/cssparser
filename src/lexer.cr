@@ -10,6 +10,27 @@ module CssParser
       @reader = Char::Reader.new(string)
     end
 
+    def match_nmchar
+      char = current_char
+      if char == '_' || (char >= 'a' && char <= 'z') || \
+          (char >= '0' && char <= '9') || char == '-'
+        next_char
+        return
+      end
+      start_pos = current_pos
+      begin
+        match_nonascii
+      rescue
+        set_current_pos(start_pos)
+        begin
+          match_escape
+        rescue
+          raise "match nmchar macro failed"
+        end
+      end
+    end
+
+
     def match_nmstart
       char = current_char
       if char == '_' || (char >= 'a' && char <= 'z')
