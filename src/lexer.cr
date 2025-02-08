@@ -15,36 +15,36 @@ module CssParser
       if char == '_' || (char >= 'a' && char <= 'z') || \
           (char >= '0' && char <= '9') || char == '-'
         next_char
-        return
+        return true
       end
       start_pos = current_pos
-      begin
-        match_nonascii
-      rescue
+      if match_nonascii
+        return true
+      else
         set_current_pos(start_pos)
-        begin
-          match_escape
-        rescue
-          raise "match nmchar macro failed"
+        if match_escape
+          return true
+        else
+          return false
         end
       end
     end
-
 
     def match_nmstart
       char = current_char
       if char == '_' || (char >= 'a' && char <= 'z')
         next_char
+        return true
       else
         start_pos = current_pos
-        begin
-          match_nonascii
-        rescue
+        if match_nonascii
+          return true
+        else
           set_current_pos(start_pos)
-          begin
-            match_escape
-          rescue
-            raise "match nmstart macro failed"
+          if match_escape
+            return true
+          else
+            return false
           end
         end
       end
@@ -54,25 +54,27 @@ module CssParser
       char = current_char
       if !char.ord.in?(0..0x9f)
         next_char
+        return true
       else
-        raise "match nonascii macro failed"
+        return false
       end
     end
 
     def match_escape
       start_pos = current_pos
-      begin
-        match_unicode
-      rescue
+      if match_unicode
+        return true
+      else
         set_current_pos(start_pos)
         char = current_char
         if char == '\\'
           char = next_char
           if !char.in?("\n\r\f0123456789abcdef")
             next_char
+            return true
           end
         else
-          raise "match escape macro failed"
+          return false
         end
       end
     end
@@ -91,7 +93,7 @@ module CssParser
             char_count += 1
           else
             if char_count == 1
-              raise "match unicode macro failed"
+              return false
             end
             break
           end
@@ -104,8 +106,9 @@ module CssParser
         elsif space?(char)
           next_char
         end
+        true
       else
-        raise "match unicode macro failed"
+        false
       end
     end
 

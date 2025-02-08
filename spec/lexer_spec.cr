@@ -31,119 +31,105 @@ module CssParser
 
     it "match unicodes" do
       lexer = Lexer.new("\\01")
-      lexer.match_unicode
+      lexer.match_unicode.should be_true
 
       lexer = Lexer.new("\\01afaf")
-      lexer.match_unicode
+      lexer.match_unicode.should be_true
 
       lexer = Lexer.new("\\01afaf\r\n")
-      lexer.match_unicode
+      lexer.match_unicode.should be_true
 
       lexer = Lexer.new("\\01afaf\n")
-      lexer.match_unicode
+      lexer.match_unicode.should be_true
 
       lexer = Lexer.new("\\01afaf ")
-      lexer.match_unicode
+      lexer.match_unicode.should be_true
 
       lexer = Lexer.new("\\01afaf\t")
-      lexer.match_unicode
+      lexer.match_unicode.should be_true
 
       lexer = Lexer.new("\\01afaf\f")
-      lexer.match_unicode
+      lexer.match_unicode.should be_true
 
-      expect_raises(Exception, "match unicode macro failed") do
-        lexer = Lexer.new("\\x000")
-        lexer.match_unicode
-      end
+      lexer = Lexer.new("\\x000")
+      lexer.match_unicode.should be_false
 
-      expect_raises(Exception, "match unicode macro failed") do
-        lexer = Lexer.new("abcdef")
-        lexer.match_unicode
-      end
+      lexer = Lexer.new("abcdef")
+      lexer.match_unicode.should be_false
     end
 
     it "match escape" do
       lexer = Lexer.new("\\01afaf")
-      lexer.match_escape
+      lexer.match_escape.should be_true
 
       lexer = Lexer.new("\\z")
-      lexer.match_escape
+      lexer.match_escape.should be_true
 
-      expect_raises(Exception, "") do
-        lexer = Lexer.new("abc")
-        lexer.match_escape
-      end
+      lexer = Lexer.new("abc")
+      lexer.match_escape.should be_false
     end
 
     it "match nonascii" do
       lexer = Lexer.new("\xa0")
-      lexer.match_nonascii
+      lexer.match_nonascii.should be_true
 
       lexer = Lexer.new("世界")
-      lexer.match_nonascii
+      lexer.match_nonascii.should be_true
 
-      expect_raises(Exception, "") do
-        lexer = Lexer.new("a")
-        lexer.match_nonascii
-      end
+      lexer = Lexer.new("a")
+      lexer.match_nonascii.should be_false
     end
 
     it "match nmstart" do
       lexer = Lexer.new("_abc")
-      lexer.match_nmstart
+      lexer.match_nmstart.should be_true
 
       lexer = Lexer.new("世界")
-      lexer.match_nmstart
+      lexer.match_nmstart.should be_true
 
       lexer = Lexer.new("\\01afaf")
-      lexer.match_nmstart
+      lexer.match_nmstart.should be_true
 
-      expect_raises(Exception, "") do
-        lexer = Lexer.new("\r")
-        lexer.match_nmstart
-      end
+      lexer = Lexer.new("\r")
+      lexer.match_nmstart.should be_false
 
-      expect_raises(Exception, "") do
-        lexer = Lexer.new("ABC")
-        lexer.match_nmstart
-      end
+      lexer = Lexer.new("ABC")
+      lexer.match_nmstart.should be_false
     end
 
     it "match nmchar" do
       lexer = Lexer.new("a")
-      lexer.match_nmchar
+      lexer.match_nmchar.should be_true
 
       lexer = Lexer.new("z")
-      lexer.match_nmchar
+      lexer.match_nmchar.should be_true
 
       lexer = Lexer.new("f")
-      lexer.match_nmchar
+      lexer.match_nmchar.should be_true
 
       lexer = Lexer.new("0")
-      lexer.match_nmchar
+      lexer.match_nmchar.should be_true
 
       lexer = Lexer.new("9")
-      lexer.match_nmchar
+      lexer.match_nmchar.should be_true
 
       lexer = Lexer.new("5")
-      lexer.match_nmchar
+      lexer.match_nmchar.should be_true
 
       lexer = Lexer.new("_")
-      lexer.match_nmchar
+      lexer.match_nmchar.should be_true
 
       lexer = Lexer.new("-")
-      lexer.match_nmchar
+      lexer.match_nmchar.should be_true
 
       lexer = Lexer.new("世界")
-      lexer.match_nmchar
+      lexer.match_nmchar.should be_true
 
       lexer = Lexer.new("\\z")
-      lexer.match_nmchar
+      lexer.match_nmchar.should be_true
 
-      expect_raises(Exception, "") do
-        lexer = Lexer.new("A")
-        lexer.match_nmchar
-      end
+      lexer = Lexer.new("A")
+      lexer.match_nmchar.should be_false
     end
   end
 end
