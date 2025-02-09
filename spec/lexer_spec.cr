@@ -208,8 +208,7 @@ module CssParser
       token = lexer.next_token
       token.type.should eq(Token::Kind::STRING)
 
-      # TODO: Verify this is correct
-      lexer = Lexer.new("'\t\\n\\r'")
+      lexer = Lexer.new("'\\\n\\\r\\\f\\\r\n'")
       token = lexer.next_token
       token.type.should eq(Token::Kind::STRING)
     end
