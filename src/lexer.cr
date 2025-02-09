@@ -130,11 +130,8 @@ module CssParser
           end
           if char == '\\'
             char = next_char
-            if char == '\\'
-              # TODO: Check if this is correct
-              if char.in?("\n") || char.in?("\r")
+            if match_nl
                 char = next_char
-              end
             end
           elsif !char.in?("\n\r\f\"") || match_escape
               char = next_char
@@ -158,11 +155,8 @@ module CssParser
           end
           if char == '\\'
             char = next_char
-            if char == '\\'
-              # TODO: Check if this is correct
-              if char.in?("\n") || char.in?("\r")
-                char = next_char
-              end
+            if match_nl
+              char = next_char
             end
           elsif !char.in?("\n\r\f\"") || match_escape
               char = next_char
@@ -174,6 +168,19 @@ module CssParser
       else
         return false
       end
+    end
+
+    def match_nl
+      char = current_char
+      if char == '\n' || char == '\f'
+        return true
+      elsif char == '\r'
+        if peek_next_char == '\n'
+          next_char
+        end
+        return true
+      end
+      return false
     end
 
     def scan_string
@@ -236,6 +243,10 @@ module CssParser
 
     def next_char
       @reader.next_char
+    end
+
+    def peek_next_char
+      @reader.peek_next_char
     end
 
     def current_pos

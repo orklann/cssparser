@@ -156,8 +156,7 @@ module CssParser
       lexer = Lexer.new("\"ABC世界\"")
       lexer.match_string1.should be_true
 
-      # TODO: Verify this is correct
-      lexer = Lexer.new("\"\t\\n\\r\"")
+      lexer = Lexer.new("\"\\\n\\\r\\\f\\\r\n\"")
       lexer.match_string1.should be_true
 
       lexer = Lexer.new("a\"")
@@ -174,12 +173,25 @@ module CssParser
       lexer = Lexer.new("'ABC世界'")
       lexer.match_string2.should be_true
 
-      # TODO: Verify this is correct
-      lexer = Lexer.new("'\t\\n\\r'")
+      lexer = Lexer.new("'\\\n\\\r\\\f\\\r\n'")
       lexer.match_string2.should be_true
 
       lexer = Lexer.new("a\"")
       lexer.match_string2.should be_false
+    end
+
+    it "match nl" do
+      lexer = Lexer.new("\r")
+      lexer.match_nl.should be_true
+
+      lexer = Lexer.new("\n")
+      lexer.match_nl.should be_true
+
+      lexer = Lexer.new("\r\n")
+      lexer.match_nl.should be_true
+
+      lexer = Lexer.new("\f")
+      lexer.match_nl.should be_true
     end
 
     it "return STRING token" do
