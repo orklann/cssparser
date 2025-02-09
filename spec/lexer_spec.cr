@@ -212,5 +212,25 @@ module CssParser
       token = lexer.next_token
       token.type.should eq(Token::Kind::STRING)
     end
+
+    it "match name" do
+      lexer = Lexer.new("_abc")
+      lexer.match_name?.should be_true
+
+      lexer = Lexer.new("abc")
+      lexer.match_name?.should be_true
+
+      lexer = Lexer.new("世界")
+      lexer.match_name?.should be_true
+
+      lexer = Lexer.new("900")
+      lexer.match_name?.should be_true
+
+      lexer = Lexer.new("900-")
+      lexer.match_name?.should be_true
+
+      lexer = Lexer.new("NOT-A-NAME")
+      lexer.match_name?.should be_false
+    end
   end
 end

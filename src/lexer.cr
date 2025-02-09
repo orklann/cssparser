@@ -10,6 +10,16 @@ module CssParser
       @reader = Char::Reader.new(string)
     end
 
+    def match_name?
+      if match_nmchar?
+        while match_nmchar?
+          match_nmchar?
+        end
+        return true
+      end
+      return false
+    end
+
     def match_nmchar?
       char = current_char
       if char == '_' || (char >= 'a' && char <= 'z') || \
