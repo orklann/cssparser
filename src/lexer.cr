@@ -148,6 +148,34 @@ module CssParser
       end
     end
 
+    def match_string2
+      char = current_char
+      if char == '\''
+        char = next_char
+        while true
+          if char == '\'' || char == '\0'
+            break
+          end
+          if char == '\\'
+            char = next_char
+            if char == '\\'
+              # TODO: Check if this is correct
+              if char.in?("\n") || char.in?("\r")
+                char = next_char
+              end
+            end
+          elsif !char.in?("\n\r\f\"") || match_escape
+              char = next_char
+          else
+            return false
+          end
+        end
+        return true
+      else
+        return false
+      end
+    end
+
     def scan_ident
       char = current_char
       if char == '-'

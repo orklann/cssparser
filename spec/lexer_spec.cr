@@ -160,5 +160,20 @@ module CssParser
       lexer = Lexer.new("\"\t\\n\\r\"")
       lexer.match_string1.should be_true
     end
+
+    it "match string2" do
+      lexer = Lexer.new("'abc'")
+      lexer.match_string2.should be_true
+
+      lexer = Lexer.new("'ABC'")
+      lexer.match_string2.should be_true
+
+      lexer = Lexer.new("'ABC世界'")
+      lexer.match_string2.should be_true
+
+      # TODO: Verify this is correct
+      lexer = Lexer.new("'\t\\n\\r'")
+      lexer.match_string2.should be_true
+    end
   end
 end
