@@ -130,7 +130,7 @@ module CssParser
       end
     end
 
-    def match_string1?
+    def match_string_double?
       char = current_char
       if char == '"'
         char = next_char
@@ -155,7 +155,7 @@ module CssParser
       end
     end
 
-    def match_string2?
+    def match_string_single?
       char = current_char
       if char == '\''
         char = next_char
@@ -196,9 +196,9 @@ module CssParser
     def scan_string
       char = current_char
       if char == '"'
-        match_string1?
+        match_string_double?
       elsif char == '\''
-        match_string2?
+        match_string_single?
       end
       @token.type = :STRING
     end

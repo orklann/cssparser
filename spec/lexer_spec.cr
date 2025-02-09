@@ -146,38 +146,38 @@ module CssParser
       token.value.should eq("@-name")
     end
 
-    it "match string1" do
+    it "match string_double" do
       lexer = Lexer.new("\"abc\"")
-      lexer.match_string1?.should be_true
+      lexer.match_string_double?.should be_true
 
       lexer = Lexer.new("\"ABC\"")
-      lexer.match_string1?.should be_true
+      lexer.match_string_double?.should be_true
 
       lexer = Lexer.new("\"ABC世界\"")
-      lexer.match_string1?.should be_true
+      lexer.match_string_double?.should be_true
 
       lexer = Lexer.new("\"\\\n\\\r\\\f\\\r\n\"")
-      lexer.match_string1?.should be_true
+      lexer.match_string_double?.should be_true
 
       lexer = Lexer.new("a\"")
-      lexer.match_string1?.should be_false
+      lexer.match_string_double?.should be_false
     end
 
-    it "match string2" do
+    it "match string_single" do
       lexer = Lexer.new("'abc'")
-      lexer.match_string2?.should be_true
+      lexer.match_string_single?.should be_true
 
       lexer = Lexer.new("'ABC'")
-      lexer.match_string2?.should be_true
+      lexer.match_string_single?.should be_true
 
       lexer = Lexer.new("'ABC世界'")
-      lexer.match_string2?.should be_true
+      lexer.match_string_single?.should be_true
 
       lexer = Lexer.new("'\\\n\\\r\\\f\\\r\n'")
-      lexer.match_string2?.should be_true
+      lexer.match_string_single?.should be_true
 
       lexer = Lexer.new("a\"")
-      lexer.match_string2?.should be_false
+      lexer.match_string_single?.should be_false
     end
 
     it "match nl" do
