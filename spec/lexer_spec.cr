@@ -159,6 +159,9 @@ module CssParser
       # TODO: Verify this is correct
       lexer = Lexer.new("\"\t\\n\\r\"")
       lexer.match_string1.should be_true
+
+      lexer = Lexer.new("a\"")
+      lexer.match_string1.should be_false
     end
 
     it "match string2" do
@@ -174,6 +177,9 @@ module CssParser
       # TODO: Verify this is correct
       lexer = Lexer.new("'\t\\n\\r'")
       lexer.match_string2.should be_true
+
+      lexer = Lexer.new("a\"")
+      lexer.match_string2.should be_false
     end
 
     it "return STRING token" do
