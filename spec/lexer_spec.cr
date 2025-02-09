@@ -145,5 +145,20 @@ module CssParser
       token.type.should eq(Token::Kind::ATKEYWORD)
       token.value.should eq("@-name")
     end
+
+    it "match string1" do
+      lexer = Lexer.new("\"abc\"")
+      lexer.match_string1.should be_true
+
+      lexer = Lexer.new("\"ABC\"")
+      lexer.match_string1.should be_true
+
+      lexer = Lexer.new("\"ABC世界\"")
+      lexer.match_string1.should be_true
+
+      # TODO: Verify this is correct
+      lexer = Lexer.new("\"\t\\n\\r\"")
+      lexer.match_string1.should be_true
+    end
   end
 end
