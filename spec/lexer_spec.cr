@@ -31,105 +31,105 @@ module CssParser
 
     it "match unicodes" do
       lexer = Lexer.new("\\01")
-      lexer.match_unicode.should be_true
+      lexer.match_unicode?.should be_true
 
       lexer = Lexer.new("\\01afaf")
-      lexer.match_unicode.should be_true
+      lexer.match_unicode?.should be_true
 
       lexer = Lexer.new("\\01afaf\r\n")
-      lexer.match_unicode.should be_true
+      lexer.match_unicode?.should be_true
 
       lexer = Lexer.new("\\01afaf\n")
-      lexer.match_unicode.should be_true
+      lexer.match_unicode?.should be_true
 
       lexer = Lexer.new("\\01afaf ")
-      lexer.match_unicode.should be_true
+      lexer.match_unicode?.should be_true
 
       lexer = Lexer.new("\\01afaf\t")
-      lexer.match_unicode.should be_true
+      lexer.match_unicode?.should be_true
 
       lexer = Lexer.new("\\01afaf\f")
-      lexer.match_unicode.should be_true
+      lexer.match_unicode?.should be_true
 
       lexer = Lexer.new("\\x000")
-      lexer.match_unicode.should be_false
+      lexer.match_unicode?.should be_false
 
       lexer = Lexer.new("abcdef")
-      lexer.match_unicode.should be_false
+      lexer.match_unicode?.should be_false
     end
 
     it "match escape" do
       lexer = Lexer.new("\\01afaf")
-      lexer.match_escape.should be_true
+      lexer.match_escape?.should be_true
 
       lexer = Lexer.new("\\z")
-      lexer.match_escape.should be_true
+      lexer.match_escape?.should be_true
 
       lexer = Lexer.new("abc")
-      lexer.match_escape.should be_false
+      lexer.match_escape?.should be_false
     end
 
     it "match nonascii" do
       lexer = Lexer.new("\xa0")
-      lexer.match_nonascii.should be_true
+      lexer.match_nonascii?.should be_true
 
       lexer = Lexer.new("世界")
-      lexer.match_nonascii.should be_true
+      lexer.match_nonascii?.should be_true
 
       lexer = Lexer.new("a")
-      lexer.match_nonascii.should be_false
+      lexer.match_nonascii?.should be_false
     end
 
     it "match nmstart" do
       lexer = Lexer.new("_abc")
-      lexer.match_nmstart.should be_true
+      lexer.match_nmstart?.should be_true
 
       lexer = Lexer.new("世界")
-      lexer.match_nmstart.should be_true
+      lexer.match_nmstart?.should be_true
 
       lexer = Lexer.new("\\01afaf")
-      lexer.match_nmstart.should be_true
+      lexer.match_nmstart?.should be_true
 
       lexer = Lexer.new("\r")
-      lexer.match_nmstart.should be_false
+      lexer.match_nmstart?.should be_false
 
       lexer = Lexer.new("ABC")
-      lexer.match_nmstart.should be_false
+      lexer.match_nmstart?.should be_false
     end
 
     it "match nmchar" do
       lexer = Lexer.new("a")
-      lexer.match_nmchar.should be_true
+      lexer.match_nmchar?.should be_true
 
       lexer = Lexer.new("z")
-      lexer.match_nmchar.should be_true
+      lexer.match_nmchar?.should be_true
 
       lexer = Lexer.new("f")
-      lexer.match_nmchar.should be_true
+      lexer.match_nmchar?.should be_true
 
       lexer = Lexer.new("0")
-      lexer.match_nmchar.should be_true
+      lexer.match_nmchar?.should be_true
 
       lexer = Lexer.new("9")
-      lexer.match_nmchar.should be_true
+      lexer.match_nmchar?.should be_true
 
       lexer = Lexer.new("5")
-      lexer.match_nmchar.should be_true
+      lexer.match_nmchar?.should be_true
 
       lexer = Lexer.new("_")
-      lexer.match_nmchar.should be_true
+      lexer.match_nmchar?.should be_true
 
       lexer = Lexer.new("-")
-      lexer.match_nmchar.should be_true
+      lexer.match_nmchar?.should be_true
 
       lexer = Lexer.new("世界")
-      lexer.match_nmchar.should be_true
+      lexer.match_nmchar?.should be_true
 
       lexer = Lexer.new("\\z")
-      lexer.match_nmchar.should be_true
+      lexer.match_nmchar?.should be_true
 
       lexer = Lexer.new("A")
-      lexer.match_nmchar.should be_false
+      lexer.match_nmchar?.should be_false
     end
 
     it "return IDENT token" do
@@ -148,50 +148,50 @@ module CssParser
 
     it "match string1" do
       lexer = Lexer.new("\"abc\"")
-      lexer.match_string1.should be_true
+      lexer.match_string1?.should be_true
 
       lexer = Lexer.new("\"ABC\"")
-      lexer.match_string1.should be_true
+      lexer.match_string1?.should be_true
 
       lexer = Lexer.new("\"ABC世界\"")
-      lexer.match_string1.should be_true
+      lexer.match_string1?.should be_true
 
       lexer = Lexer.new("\"\\\n\\\r\\\f\\\r\n\"")
-      lexer.match_string1.should be_true
+      lexer.match_string1?.should be_true
 
       lexer = Lexer.new("a\"")
-      lexer.match_string1.should be_false
+      lexer.match_string1?.should be_false
     end
 
     it "match string2" do
       lexer = Lexer.new("'abc'")
-      lexer.match_string2.should be_true
+      lexer.match_string2?.should be_true
 
       lexer = Lexer.new("'ABC'")
-      lexer.match_string2.should be_true
+      lexer.match_string2?.should be_true
 
       lexer = Lexer.new("'ABC世界'")
-      lexer.match_string2.should be_true
+      lexer.match_string2?.should be_true
 
       lexer = Lexer.new("'\\\n\\\r\\\f\\\r\n'")
-      lexer.match_string2.should be_true
+      lexer.match_string2?.should be_true
 
       lexer = Lexer.new("a\"")
-      lexer.match_string2.should be_false
+      lexer.match_string2?.should be_false
     end
 
     it "match nl" do
       lexer = Lexer.new("\r")
-      lexer.match_nl.should be_true
+      lexer.match_nl?.should be_true
 
       lexer = Lexer.new("\n")
-      lexer.match_nl.should be_true
+      lexer.match_nl?.should be_true
 
       lexer = Lexer.new("\r\n")
-      lexer.match_nl.should be_true
+      lexer.match_nl?.should be_true
 
       lexer = Lexer.new("\f")
-      lexer.match_nl.should be_true
+      lexer.match_nl?.should be_true
     end
 
     it "return STRING token" do

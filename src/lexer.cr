@@ -10,7 +10,7 @@ module CssParser
       @reader = Char::Reader.new(string)
     end
 
-    def match_nmchar
+    def match_nmchar?
       char = current_char
       if char == '_' || (char >= 'a' && char <= 'z') || \
           (char >= '0' && char <= '9') || char == '-'
@@ -18,11 +18,11 @@ module CssParser
         return true
       end
       start_pos = current_pos
-      if match_nonascii
+      if match_nonascii?
         return true
       else
         set_current_pos(start_pos)
-        if match_escape
+        if match_escape?
           return true
         else
           return false
@@ -30,18 +30,18 @@ module CssParser
       end
     end
 
-    def match_nmstart
+    def match_nmstart?
       char = current_char
       if char == '_' || (char >= 'a' && char <= 'z')
         next_char
         return true
       else
         start_pos = current_pos
-        if match_nonascii
+        if match_nonascii?
           return true
         else
           set_current_pos(start_pos)
-          if match_escape
+          if match_escape?
             return true
           else
             return false
@@ -50,7 +50,7 @@ module CssParser
       end
     end
 
-    def match_nonascii
+    def match_nonascii?
       char = current_char
       if !char.ord.in?(0..0x9f)
         next_char
@@ -60,9 +60,9 @@ module CssParser
       end
     end
 
-    def match_escape
+    def match_escape?
       start_pos = current_pos
-      if match_unicode
+      if match_unicode?
         return true
       else
         set_current_pos(start_pos)
@@ -79,7 +79,7 @@ module CssParser
       end
     end
 
-    def match_unicode
+    def match_unicode?
       char = current_char
       if char == '\\'
         char = next_char
@@ -120,7 +120,7 @@ module CssParser
       end
     end
 
-    def match_string1
+    def match_string1?
       char = current_char
       if char == '"'
         char = next_char
@@ -130,10 +130,10 @@ module CssParser
           end
           if char == '\\'
             char = next_char
-            if match_nl
+            if match_nl?
                 char = next_char
             end
-          elsif !char.in?("\n\r\f\"") || match_escape
+          elsif !char.in?("\n\r\f\"") || match_escape?
               char = next_char
           else
             return false
@@ -145,7 +145,7 @@ module CssParser
       end
     end
 
-    def match_string2
+    def match_string2?
       char = current_char
       if char == '\''
         char = next_char
@@ -155,10 +155,10 @@ module CssParser
           end
           if char == '\\'
             char = next_char
-            if match_nl
+            if match_nl?
               char = next_char
             end
-          elsif !char.in?("\n\r\f\"") || match_escape
+          elsif !char.in?("\n\r\f\"") || match_escape?
               char = next_char
           else
             return false
@@ -170,7 +170,7 @@ module CssParser
       end
     end
 
-    def match_nl
+    def match_nl?
       char = current_char
       if char == '\n' || char == '\f'
         return true
@@ -186,9 +186,9 @@ module CssParser
     def scan_string
       char = current_char
       if char == '"'
-        match_string1
+        match_string1?
       elsif char == '\''
-        match_string2
+        match_string2?
       end
       @token.type = :STRING
     end
@@ -199,9 +199,9 @@ module CssParser
         next_char
       end
 
-      if match_nmstart
+      if match_nmstart?
         while current_char != '\0'
-          match_nmchar
+          match_nmchar?
         end
         @token.type = :IDENT
       end
