@@ -3,6 +3,7 @@ module CssParser
     enum Kind
       IDENT
       ATKEYWORD
+      STRING
       EOF
     end
 

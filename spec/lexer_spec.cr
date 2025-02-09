@@ -175,5 +175,25 @@ module CssParser
       lexer = Lexer.new("'\t\\n\\r'")
       lexer.match_string2.should be_true
     end
+
+    it "return STRING token" do
+      lexer = Lexer.new("'abc'")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::STRING)
+
+
+      lexer = Lexer.new("'ABC'")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::STRING)
+
+      lexer = Lexer.new("'ABC世界'")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::STRING)
+
+      # TODO: Verify this is correct
+      lexer = Lexer.new("'\t\\n\\r'")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::STRING)
+    end
   end
 end

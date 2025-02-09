@@ -176,6 +176,16 @@ module CssParser
       end
     end
 
+    def scan_string
+      char = current_char
+      if char == '"'
+        match_string1
+      elsif char == '\''
+        match_string2
+      end
+      @token.type = :STRING
+    end
+
     def scan_ident
       char = current_char
       if char == '-'
@@ -209,6 +219,12 @@ module CssParser
         @token.value = string_range(start_pos)
       when '@'
         scan_at_keyword
+        @token.value = string_range(start_pos)
+      when '\''
+        scan_string
+        @token.value = string_range(start_pos)
+      when '"'
+        scan_string
         @token.value = string_range(start_pos)
       end
       @token
