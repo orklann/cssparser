@@ -4,6 +4,7 @@ module CssParser
       IDENT
       ATKEYWORD
       STRING
+      HASH
       EOF
     end
 

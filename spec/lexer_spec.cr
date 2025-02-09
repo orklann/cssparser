@@ -232,5 +232,32 @@ module CssParser
       lexer = Lexer.new("NOT-A-NAME")
       lexer.match_name?.should be_false
     end
+
+    it "return HASH token" do
+      lexer = Lexer.new("#_abc")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::HASH)
+      token.value.should eq("#_abc")
+
+      lexer = Lexer.new("#abc")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::HASH)
+      token.value.should eq("#abc")
+
+      lexer = Lexer.new("#世界")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::HASH)
+      token.value.should eq("#世界")
+
+      lexer = Lexer.new("#900")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::HASH)
+      token.value.should eq("#900")
+
+      lexer = Lexer.new("#900-")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::HASH)
+      token.value.should eq("#900-")
+    end
   end
 end
