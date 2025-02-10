@@ -279,5 +279,12 @@ module CssParser
       lexer = Lexer.new("1000.00.")
       lexer.match_num?.should be_true
     end
+
+    it "return NUM token" do
+      lexer = Lexer.new("9999")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::NUM)
+      token.value.should eq("9999")
+    end
   end
 end

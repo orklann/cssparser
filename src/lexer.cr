@@ -222,6 +222,12 @@ module CssParser
       return false
     end
 
+    def scan_num
+      if match_num?
+        @token.type = :NUM
+      end
+    end
+
     def scan_hash
       char = current_char
       if char == '#'
@@ -288,6 +294,18 @@ module CssParser
         @token.value = string_range(start_pos)
       when '#'
         scan_hash
+        @token.value = string_range(start_pos)
+      when '0'
+      when '1'
+      when '2'
+      when '3'
+      when '4'
+      when '5'
+      when '6'
+      when '7'
+      when '8'
+      when '9'
+        scan_num
         @token.value = string_range(start_pos)
       end
       @token

@@ -5,6 +5,7 @@ module CssParser
       ATKEYWORD
       STRING
       HASH
+      NUM
       EOF
     end
 
