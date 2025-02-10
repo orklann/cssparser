@@ -7,6 +7,7 @@ module CssParser
       HASH
       NUM
       EOF
+      UNKNOWN
     end
 
     property type : Kind
