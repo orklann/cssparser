@@ -20,6 +20,12 @@ This parser is based on the [CSS 2.1 specification](https://www.w3.org/TR/CSS2/)
 require "cssparser"
 ```
 
+## Run tests
+
+```
+crystal spec
+```
+
 ## Contributors
 
 - [Tommy Jeff](https://github.com/orklann)
