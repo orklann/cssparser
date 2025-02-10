@@ -4,7 +4,7 @@ module CssParser
   describe Token do
     it "has correct EOF type by default" do
       token = Token.new
-      token.type.should eq(Token::Kind::EOF)
+      token.type.should eq(Token::Kind::UNKNOWN)
     end
 
     it "has IDENT type" do

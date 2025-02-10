@@ -14,7 +14,7 @@ module CssParser
     property value : String | Nil
 
     def initialize
-      @type = Kind::EOF
+      @type = Kind::UNKNOWN
       @value = nil
     end
   end
