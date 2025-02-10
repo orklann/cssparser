@@ -275,6 +275,9 @@ module CssParser
 
       lexer = Lexer.new("1000.")
       lexer.match_num?.should be_false
+
+      lexer = Lexer.new("1000.00.")
+      lexer.match_num?.should be_true
     end
   end
 end
