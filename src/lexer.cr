@@ -291,6 +291,7 @@ module CssParser
     end
 
     def next_token
+      reset_token
       start_pos = current_pos
       char = current_char
 
@@ -348,6 +349,11 @@ module CssParser
 
     def current_pos
       @reader.pos
+    end
+
+    def reset_token
+      @token.type = :UNKNOWN
+      @token.value = nil
     end
 
     def set_current_pos(pos)
