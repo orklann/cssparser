@@ -10,6 +10,33 @@ module CssParser
       @reader = Char::Reader.new(string)
     end
 
+    def match_num?
+      char = current_char
+      if char >= '0' && char <= '9'
+        char = next_char
+        get_period = false
+        while true
+          if char >= '0' && char <= '9'
+            char = next_char
+            if get_period
+              get_period = false
+            end
+          elsif char == '.'
+            char = next_char
+            get_period = true
+          else
+            if get_period
+              return false
+            end
+            break
+          end
+        end
+        return true
+      else
+        return false
+      end
+    end
+
     def match_name?
       if match_nmchar?
         while match_nmchar?
