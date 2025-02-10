@@ -234,12 +234,8 @@ module CssParser
         next_char
         if match_name?
           @token.type = :HASH
-          return true
-        else
-          return false
         end
       end
-      return false
     end
 
     def scan_string
