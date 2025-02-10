@@ -286,5 +286,12 @@ module CssParser
       token.type.should eq(Token::Kind::NUM)
       token.value.should eq("9999")
     end
+
+    it "return PERCENTAGE token" do
+      lexer = Lexer.new("99%")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::PERCENTAGE)
+      token.value.should eq("99%")
+    end
   end
 end

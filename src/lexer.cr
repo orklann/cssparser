@@ -222,6 +222,18 @@ module CssParser
       return false
     end
 
+    def scan_percentage?
+      if match_num?
+        char = current_char
+        if char == '%'
+          next_char
+          @token.type = :PERCENTAGE
+          return true
+        end
+      end
+      return false
+    end
+
     def scan_num
       if match_num?
         @token.type = :NUM
@@ -301,7 +313,11 @@ module CssParser
       when '7'
       when '8'
       when '9'
-        scan_num
+        if scan_percentage?
+        else
+          set_current_pos(start_pos)
+          scan_num
+        end
         @token.value = string_range(start_pos)
       end
       @token

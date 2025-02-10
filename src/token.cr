@@ -6,6 +6,7 @@ module CssParser
       STRING
       HASH
       NUM
+      PERCENTAGE
       EOF
       UNKNOWN
     end
