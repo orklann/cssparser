@@ -14,7 +14,7 @@ module CssParser
       char = current_char
       if char >= '0' && char <= '9'
         char = next_char
-        can_update_period = true
+        can_process_period = true
         get_period = false
         while true
           if char >= '0' && char <= '9'
@@ -22,9 +22,9 @@ module CssParser
             if get_period
               get_period = false
             end
-          elsif char == '.' && can_update_period
+          elsif char == '.' && can_process_period
             char = next_char
-            can_update_period = false
+            can_process_period = false
             get_period = true
           else
             if get_period
