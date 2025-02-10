@@ -7,6 +7,7 @@ module CssParser
       HASH
       NUM
       PERCENTAGE
+      DIMENSION
       EOF
       UNKNOWN
     end
