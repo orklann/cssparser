@@ -222,6 +222,15 @@ module CssParser
       return false
     end
 
+    def scan_dimesion
+      if match_num?
+        scan_ident
+        if @token.type == Token::Kind::IDENT
+          @token.type = :DIMENSION
+        end
+      end
+    end
+
     def scan_percentage
       if match_num?
         char = current_char
@@ -311,10 +320,14 @@ module CssParser
       when '7'
       when '8'
       when '9'
-        scan_percentage
-        if @token.type != Token::Kind::PERCENTAGE
+        scan_dimesion
+        if @token.type != Token::Kind::DIMENSION
           set_current_pos(start_pos)
-          scan_num
+          scan_percentage
+          if @token.type != Token::Kind::PERCENTAGE
+            set_current_pos(start_pos)
+            scan_num
+          end
         end
         @token.value = string_range(start_pos)
       end

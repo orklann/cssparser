@@ -293,5 +293,12 @@ module CssParser
       token.type.should eq(Token::Kind::PERCENTAGE)
       token.value.should eq("99%")
     end
+
+    it "return DIMENSION token" do
+      lexer = Lexer.new("99pt")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::DIMENSION)
+      token.value.should eq("99pt")
+    end
   end
 end
