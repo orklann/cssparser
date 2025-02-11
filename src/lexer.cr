@@ -161,15 +161,10 @@ module CssParser
 
     def match_w?
       char = current_char
-      if space?(char)
+      while space?(char)
         char = next_char
-        while space?(char)
-          char = next_char
-        end
-        return true
-      else
-        return false
       end
+      return true
     end
 
     def match_string?
