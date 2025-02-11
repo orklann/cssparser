@@ -246,23 +246,33 @@ module CssParser
     def scan_uri
       char = current_char
       if char == 'u' && next_char == 'r' && next_char == 'l' && next_char == '('
+        next_char
         match_w?
+        start_pos = current_pos
         if match_string?
           match_w?
         else
+          set_current_pos(start_pos)
           char = current_char
-          while true
-            if !char.in?("#$%&*-\[\]-~")
-              char = next_char
-            elsif match_nonascii? || match_escape?
-              char = current_char
-            else
-              break
+          if char != ')'
+            while true
+              if !char.in?("#$%&*-\[\]-~")
+                char = next_char
+              elsif match_nonascii? || match_escape?
+                char = current_char
+              else
+                break
+              end
             end
+          else
+            next_char
+            @token.type = :URI
+            return
           end
         end
         match_w?
         if next_char == ')'
+          next_char
           @token.type = :URI
         end
       end
@@ -340,6 +350,18 @@ module CssParser
       reset_token
       start_pos = current_pos
       char = current_char
+
+      if char == 'u' && next_char == 'r' && next_char == 'l'
+        set_current_pos(start_pos)
+        scan_uri
+      end
+
+      if @token.type != Token::Kind::URI
+        set_current_pos(start_pos)
+      else
+        @token.value = string_range(start_pos)
+        return @token
+      end
 
       if match_nmstart?
         scan_ident

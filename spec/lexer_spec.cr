@@ -138,10 +138,10 @@ module CssParser
       token.type.should eq(Token::Kind::IDENT)
       token.value.should eq("-name")
 
-      lexer = Lexer.new("name")
+      lexer = Lexer.new("url")
       token = lexer.next_token
       token.type.should eq(Token::Kind::IDENT)
-      token.value.should eq("name")
+      token.value.should eq("url")
     end
 
     it "return ATKEYWORD token" do
@@ -320,6 +320,28 @@ module CssParser
 
       lexer = Lexer.new(" \t\n\r\f")
       lexer.match_w?.should be_true
+    end
+
+    it "return URI token" do
+      lexer = Lexer.new("url(\"http://localhost\")")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::URI)
+      token.value.should eq("url(\"http://localhost\")")
+
+      lexer = Lexer.new("url('http://www.example.com\')")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::URI)
+      token.value.should eq("url('http://www.example.com\')")
+
+      lexer = Lexer.new("url()")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::URI)
+      token.value.should eq("url()")
+
+      lexer = Lexer.new("url('')")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::URI)
+      token.value.should eq("url('')")
     end
   end
 end
