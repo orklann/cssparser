@@ -300,5 +300,13 @@ module CssParser
       token.type.should eq(Token::Kind::DIMENSION)
       token.value.should eq("99pt")
     end
+
+    it "match string" do
+      lexer = Lexer.new("\"Hello\"")
+      lexer.match_string?.should be_true
+
+      lexer = Lexer.new("'Hello'")
+      lexer.match_string?.should be_true
+    end
   end
 end

@@ -159,6 +159,19 @@ module CssParser
       end
     end
 
+    def match_string?
+      start_pos = current_pos
+      if match_string_single?
+        return true
+      else
+        set_current_pos(start_pos)
+        if match_string_double?
+          return true
+        end
+      end
+      return false
+    end
+
     def match_string_double?
       char = current_char
       if char == '"'
