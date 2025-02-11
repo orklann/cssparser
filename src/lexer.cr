@@ -159,6 +159,19 @@ module CssParser
       end
     end
 
+    def match_w?
+      char = current_char
+      if space?(char)
+        char = next_char
+        while space?(char)
+          char = next_char
+        end
+        return true
+      else
+        return false
+      end
+    end
+
     def match_string?
       start_pos = current_pos
       if match_string_single?

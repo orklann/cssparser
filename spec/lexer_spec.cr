@@ -308,5 +308,13 @@ module CssParser
       lexer = Lexer.new("'Hello'")
       lexer.match_string?.should be_true
     end
+
+    it "match white spaces" do
+      lexer = Lexer.new(" ")
+      lexer.match_w?.should be_true
+
+      lexer = Lexer.new(" \t\n\r\f")
+      lexer.match_w?.should be_true
+    end
   end
 end
