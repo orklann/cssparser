@@ -341,6 +341,12 @@ module CssParser
       start_pos = current_pos
       char = current_char
 
+      if match_nmstart?
+        scan_ident
+        @token.value = string_range(start_pos)
+        return @token
+      end
+
       case char
       when '-'
         scan_ident
