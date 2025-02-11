@@ -159,12 +159,11 @@ module CssParser
       end
     end
 
-    def match_w?
+    def match_w
       char = current_char
       while space?(char)
         char = next_char
       end
-      return true
     end
 
     def match_string?
@@ -247,10 +246,10 @@ module CssParser
       char = current_char
       if char == 'u' && next_char == 'r' && next_char == 'l' && next_char == '('
         next_char
-        match_w?
+        match_w
         start_pos = current_pos
         if match_string?
-          match_w?
+          match_w
         else
           set_current_pos(start_pos)
           char = current_char
@@ -270,7 +269,7 @@ module CssParser
             return
           end
         end
-        match_w?
+        match_w
         if next_char == ')'
           next_char
           @token.type = :URI
