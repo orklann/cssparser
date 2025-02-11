@@ -8,6 +8,7 @@ module CssParser
       NUM
       PERCENTAGE
       DIMENSION
+      URI
       EOF
       UNKNOWN
     end

@@ -243,6 +243,31 @@ module CssParser
       return false
     end
 
+    def scan_uri
+      char = current_char
+      if char == 'u' && next_char == 'r' && next_char == 'l' && next_char == '('
+        match_w?
+        if match_string?
+          match_w?
+        else
+          char = current_char
+          while true
+            if !char.in?("#$%&*-\[\]-~")
+              char = next_char
+            elsif match_nonascii? || match_escape?
+              char = current_char
+            else
+              break
+            end
+          end
+        end
+        match_w?
+        if next_char == ')'
+          @token.type = :URI
+        end
+      end
+    end
+
     def scan_dimesion
       if match_num?
         scan_ident
