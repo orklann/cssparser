@@ -265,6 +265,13 @@ module CssParser
       token.value.should eq("#900-")
     end
 
+    it "works with match_w" do
+      lexer = Lexer.new(" \r\n\f9000")
+      lexer.match_w
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::NUM)
+    end
+
     it "match num" do
       lexer = Lexer.new("09090")
       lexer.match_num?.should be_true
