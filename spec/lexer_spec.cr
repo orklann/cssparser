@@ -467,5 +467,12 @@ module CssParser
       token.type.should eq(Token::Kind::CLOSING_PARENTHESIS)
       token.value.should eq(")")
     end
+
+    it "return SQUARE_BRACKET token" do
+      lexer = Lexer.new("[")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::SQUARE_BRACKET)
+      token.value.should eq("[")
+    end
   end
 end
