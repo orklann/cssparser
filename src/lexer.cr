@@ -473,10 +473,7 @@ module CssParser
       when '@'
         scan_at_keyword
         @token.value = string_range(start_pos)
-      when '\''
-        scan_string
-        @token.value = string_range(start_pos)
-      when '"'
+      when '\'' || '"'
         scan_string
         @token.value = string_range(start_pos)
       when '#'
