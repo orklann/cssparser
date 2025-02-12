@@ -13,6 +13,7 @@ module CssParser
       CDO
       CDC
       S
+      COLON
       EOF
       UNKNOWN
     end
