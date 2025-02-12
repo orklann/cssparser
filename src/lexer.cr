@@ -504,6 +504,10 @@ module CssParser
         next_char
         @token.type = :SEMICOLON
         @token.value = string_range(start_pos)
+      when '{'
+        next_char
+        @token.type = :CURLY_BRACKET
+        @token.value = string_range(start_pos)
       end
       @token
     end

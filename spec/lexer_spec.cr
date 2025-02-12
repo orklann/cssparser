@@ -439,5 +439,12 @@ module CssParser
       token.type.should eq(Token::Kind::SEMICOLON)
       token.value.should eq(";")
     end
+
+    it "return CURLY_BRACKET token" do
+      lexer = Lexer.new("{")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::CURLY_BRACKET)
+      token.value.should eq("{")
+    end
   end
 end
