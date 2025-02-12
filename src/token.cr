@@ -14,6 +14,7 @@ module CssParser
       CDC
       S
       COLON
+      SEMICOLON
       EOF
       UNKNOWN
     end

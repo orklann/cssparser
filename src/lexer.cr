@@ -500,6 +500,10 @@ module CssParser
         next_char
         @token.type = :COLON
         @token.value = string_range(start_pos)
+      when ';'
+        next_char
+        @token.type = :SEMICOLON
+        @token.value = string_range(start_pos)
       end
       @token
     end

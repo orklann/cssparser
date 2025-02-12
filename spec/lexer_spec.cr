@@ -432,5 +432,12 @@ module CssParser
       token.type.should eq(Token::Kind::COLON)
       token.value.should eq(":")
     end
+
+    it "return SEMICOLON token" do
+      lexer = Lexer.new(";")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::SEMICOLON)
+      token.value.should eq(";")
+    end
   end
 end
