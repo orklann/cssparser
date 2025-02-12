@@ -395,7 +395,9 @@ module CssParser
 
       if match_nmstart?
         while current_char != '\0'
-          match_nmchar?
+          if !match_nmchar?
+            break
+          end
         end
         @token.type = :IDENT
       end
@@ -437,6 +439,7 @@ module CssParser
 
       char = current_char
       start_pos = current_pos
+
       if char == 'u' && peek_next_char == '+'
         set_current_pos(start_pos)
         scan_unicode_range
@@ -448,11 +451,15 @@ module CssParser
         @token.value = string_range(start_pos)
         return @token
       end
+
       if match_nmstart?
         scan_ident
         @token.value = string_range(start_pos)
         return @token
       end
+
+      set_current_pos(start_pos)
+      char = current_char
 
       case char
       when '-'
@@ -475,16 +482,7 @@ module CssParser
       when '#'
         scan_hash
         @token.value = string_range(start_pos)
-      when '0'
-      when '1'
-      when '2'
-      when '3'
-      when '4'
-      when '5'
-      when '6'
-      when '7'
-      when '8'
-      when '9'
+      when '0'..'9'
         scan_dimesion
         if @token.type != Token::Kind::DIMENSION
           set_current_pos(start_pos)

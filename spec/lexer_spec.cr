@@ -290,6 +290,9 @@ module CssParser
 
       lexer = Lexer.new("1000.00.")
       lexer.match_num?.should be_true
+
+      lexer = Lexer.new("50")
+      lexer.match_num?.should be_true
     end
 
     it "return NUM token" do
@@ -297,13 +300,18 @@ module CssParser
       token = lexer.next_token
       token.type.should eq(Token::Kind::NUM)
       token.value.should eq("9999")
+
+      lexer = Lexer.new("50")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::NUM)
+      token.value.should eq("50")
     end
 
     it "return PERCENTAGE token" do
-      lexer = Lexer.new("99%")
+      lexer = Lexer.new("50%")
       token = lexer.next_token
       token.type.should eq(Token::Kind::PERCENTAGE)
-      token.value.should eq("99%")
+      token.value.should eq("50%")
     end
 
     it "return DIMENSION token" do
@@ -379,6 +387,43 @@ module CssParser
       token = lexer.next_token
       token.type.should eq(Token::Kind::S)
       token.value.should eq(" \n")
+    end
+
+    it "returns a sequences of tokens" do
+      lexer = Lexer.new("name 9000 u+123456 #hash 50% name2")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::IDENT)
+
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::S)
+
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::NUM)
+      token.value.should eq("9000")
+
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::S)
+
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::UNICODE_RANGE)
+
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::S)
+
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::HASH)
+
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::S)
+
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::PERCENTAGE)
+
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::S)
+
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::IDENT)
     end
   end
 end
