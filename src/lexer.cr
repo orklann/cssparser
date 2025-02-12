@@ -242,6 +242,40 @@ module CssParser
       return false
     end
 
+    def scan_unicode_range
+      char = current_char
+      if char == 'u' && next_char == '+'
+        char_count = 1
+        char = next_char
+        while true
+          if char_count > 6
+            break
+          end
+          if (char >= '0' && char <= '9') || (char >= 'a' && char <= 'f') \
+              || char == '?'
+            char = next_char
+          else
+            break
+          end
+        end
+        if char == '-'
+          char = next_char
+          char_count = 1
+          while true
+            if char_count > 6
+              break
+            end
+            if (char >= '0' && char <= '9') || (char >= 'a' && char <= 'f')
+              char = next_char
+            else
+              break
+            end
+          end
+        end
+        @token.type = :UNICODE_RANGE
+      end
+    end
+
     def scan_uri
       char = current_char
       if char == 'u' && next_char == 'r' && next_char == 'l' && next_char == '('
@@ -362,6 +396,19 @@ module CssParser
         return @token
       end
 
+      char = current_char
+      start_pos = current_pos
+      if char == 'u' && peek_next_char == '+'
+        set_current_pos(start_pos)
+        scan_unicode_range
+      end
+
+      if @token.type != Token::Kind::UNICODE_RANGE
+        set_current_pos(start_pos)
+      else
+        @token.value = string_range(start_pos)
+        return @token
+      end
       if match_nmstart?
         scan_ident
         @token.value = string_range(start_pos)

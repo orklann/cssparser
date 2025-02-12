@@ -342,5 +342,17 @@ module CssParser
       token.type.should eq(Token::Kind::URI)
       token.value.should eq("url('')")
     end
+
+    it "return UNICODE_RANGE token" do
+      lexer = Lexer.new("u+111111")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::UNICODE_RANGE)
+      token.value.should eq("u+111111")
+
+      lexer = Lexer.new("u+abcdef-eeffff")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::UNICODE_RANGE)
+      token.value.should eq("u+abcdef-eeffff")
+    end
   end
 end

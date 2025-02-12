@@ -9,6 +9,7 @@ module CssParser
       PERCENTAGE
       DIMENSION
       URI
+      UNICODE_RANGE
       EOF
       UNKNOWN
     end
