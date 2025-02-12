@@ -250,6 +250,14 @@ module CssParser
       end
     end
 
+    def scan_cdc
+      char = current_char
+      if char == '-' && next_char == '-' && next_char == '>'
+        next_char
+        @token.type = :CDC
+      end
+    end
+
     def scan_unicode_range
       char = current_char
       if char == 'u' && next_char == '+'
@@ -425,7 +433,12 @@ module CssParser
 
       case char
       when '-'
+        start_pos = current_pos
         scan_ident
+        if @token.type != Token::Kind::IDENT
+          set_current_pos(start_pos)
+          scan_cdc
+        end
         @token.value = string_range(start_pos)
       when '@'
         scan_at_keyword

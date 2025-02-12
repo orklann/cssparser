@@ -11,6 +11,7 @@ module CssParser
       URI
       UNICODE_RANGE
       CDO
+      CDC
       EOF
       UNKNOWN
     end

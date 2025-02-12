@@ -361,5 +361,12 @@ module CssParser
       token.type.should eq(Token::Kind::CDO)
       token.value.should eq("<!--")
     end
+
+    it "return CDC token" do
+      lexer = Lexer.new("-->")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::CDC)
+      token.value.should eq("-->")
+    end
   end
 end
