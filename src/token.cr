@@ -16,6 +16,7 @@ module CssParser
       COLON
       SEMICOLON
       CURLY_BRACKET
+      CLOSING_CURLY_BRACKET
       EOF
       UNKNOWN
     end
