@@ -242,6 +242,21 @@ module CssParser
       return false
     end
 
+    def scan_s
+      char = current_char
+      if char.in?(" \t\r\n\f")
+        char = next_char
+        while true
+          if char.in?(" \t\r\n\f")
+            char = next_char
+          else
+            break
+          end
+        end
+        @token.type = :S
+      end
+    end
+
     def scan_cdo
       char = current_char
       if char == '<' && next_char == '!' && next_char == '-' && next_char == '-'
@@ -399,6 +414,14 @@ module CssParser
       reset_token
       start_pos = current_pos
       char = current_char
+
+      scan_s
+      if @token.type != Token::Kind::S
+        set_current_pos(start_pos)
+      else
+        @token.value = string_range(start_pos)
+        return @token
+      end
 
       if char == 'u' && next_char == 'r' && next_char == 'l'
         set_current_pos(start_pos)

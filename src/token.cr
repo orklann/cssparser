@@ -12,6 +12,7 @@ module CssParser
       UNICODE_RANGE
       CDO
       CDC
+      S
       EOF
       UNKNOWN
     end

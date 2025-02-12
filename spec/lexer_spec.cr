@@ -368,5 +368,17 @@ module CssParser
       token.type.should eq(Token::Kind::CDC)
       token.value.should eq("-->")
     end
+
+    it "return S token" do
+      lexer = Lexer.new(" \n\r\t\f")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::S)
+      token.value.should eq(" \n\r\t\f")
+
+      lexer = Lexer.new(" \n")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::S)
+      token.value.should eq(" \n")
+    end
   end
 end
