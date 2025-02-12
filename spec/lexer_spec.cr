@@ -354,5 +354,12 @@ module CssParser
       token.type.should eq(Token::Kind::UNICODE_RANGE)
       token.value.should eq("u+abcdef-eeffff")
     end
+
+    it "return CDO token" do
+      lexer = Lexer.new("<!--")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::CDO)
+      token.value.should eq("<!--")
+    end
   end
 end

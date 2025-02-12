@@ -10,6 +10,7 @@ module CssParser
       DIMENSION
       URI
       UNICODE_RANGE
+      CDO
       EOF
       UNKNOWN
     end

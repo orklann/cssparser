@@ -242,6 +242,14 @@ module CssParser
       return false
     end
 
+    def scan_cdo
+      char = current_char
+      if char == '<' && next_char == '!' && next_char == '-' && next_char == '-'
+        next_char
+        @token.type = :CDO
+      end
+    end
+
     def scan_unicode_range
       char = current_char
       if char == 'u' && next_char == '+'
@@ -450,6 +458,9 @@ module CssParser
             scan_num
           end
         end
+        @token.value = string_range(start_pos)
+      when '<'
+        scan_cdo
         @token.value = string_range(start_pos)
       end
       @token
