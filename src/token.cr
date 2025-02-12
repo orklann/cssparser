@@ -17,6 +17,7 @@ module CssParser
       SEMICOLON
       CURLY_BRACKET
       CLOSING_CURLY_BRACKET
+      PARENTHESIS
       EOF
       UNKNOWN
     end
