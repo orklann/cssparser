@@ -516,6 +516,10 @@ module CssParser
         next_char
         @token.type = :PARENTHESIS
         @token.value = string_range(start_pos)
+      when ')'
+        next_char
+        @token.type = :CLOSING_PARENTHESIS
+        @token.value = string_range(start_pos)
       end
       @token
     end

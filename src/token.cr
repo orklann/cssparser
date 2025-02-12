@@ -18,6 +18,7 @@ module CssParser
       CURLY_BRACKET
       CLOSING_CURLY_BRACKET
       PARENTHESIS
+      CLOSING_PARENTHESIS
       EOF
       UNKNOWN
     end

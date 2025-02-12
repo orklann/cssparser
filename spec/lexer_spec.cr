@@ -460,5 +460,12 @@ module CssParser
       token.type.should eq(Token::Kind::PARENTHESIS)
       token.value.should eq("(")
     end
+
+    it "return CLOSING_PARENTHESIS token" do
+      lexer = Lexer.new(")")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::CLOSING_PARENTHESIS)
+      token.value.should eq(")")
+    end
   end
 end
