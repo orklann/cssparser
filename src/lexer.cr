@@ -524,6 +524,10 @@ module CssParser
         next_char
         @token.type = :SQUARE_BRACKET
         @token.value = string_range(start_pos)
+      when ']'
+        next_char
+        @token.type = :CLOSING_SQUARE_BRACKET
+        @token.value = string_range(start_pos)
       end
       @token
     end

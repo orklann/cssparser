@@ -20,6 +20,7 @@ module CssParser
       PARENTHESIS
       CLOSING_PARENTHESIS
       SQUARE_BRACKET
+      CLOSING_SQUARE_BRACKET
       EOF
       UNKNOWN
     end
