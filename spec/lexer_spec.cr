@@ -505,5 +505,12 @@ module CssParser
       token.type.should eq(Token::Kind::COMMENT)
       token.value.should eq("/*a /*comment*/")
     end
+
+    it "return FUNCTION token" do
+      lexer = Lexer.new("smooth(")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::FUNCTION)
+      token.value.should eq("smooth(")
+    end
   end
 end

@@ -433,6 +433,26 @@ module CssParser
       end
     end
 
+    def scan_function
+      char = current_char
+      if char == '-'
+        next_char
+      end
+
+      if match_nmstart?
+        while current_char != '\0'
+          if !match_nmchar?
+            break
+          end
+        end
+        char = current_char
+        if char == '('
+          next_char
+          @token.type = :FUNCTION
+        end
+      end
+    end
+
     def scan_at_keyword
       char = current_char
       if char == '@'
@@ -476,6 +496,15 @@ module CssParser
       end
 
       if @token.type != Token::Kind::UNICODE_RANGE
+        set_current_pos(start_pos)
+      else
+        @token.value = string_range(start_pos)
+        return @token
+      end
+
+      scan_function
+
+      if @token.type != Token::Kind::FUNCTION
         set_current_pos(start_pos)
       else
         @token.value = string_range(start_pos)
