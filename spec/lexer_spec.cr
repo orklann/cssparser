@@ -519,5 +519,12 @@ module CssParser
       token.type.should eq(Token::Kind::INCLUDES)
       token.value.should eq("~=")
     end
+
+    it "return DASHMATCH token" do
+      lexer = Lexer.new("|=")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::DASHMATCH)
+      token.value.should eq("|=")
+    end
   end
 end

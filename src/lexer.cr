@@ -594,6 +594,12 @@ module CssParser
           @token.type = :INCLUDES
           @token.value = string_range(start_pos)
         end
+      when '|'
+        if next_char == '='
+          next_char
+          @token.type = :DASHMATCH
+          @token.value = string_range(start_pos)
+        end
       end
       @token
     end

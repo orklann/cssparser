@@ -24,6 +24,7 @@ module CssParser
       COMMENT
       FUNCTION
       INCLUDES
+      DASHMATCH
       EOF
       UNKNOWN
     end
