@@ -25,6 +25,7 @@ module CssParser
       FUNCTION
       INCLUDES
       DASHMATCH
+      DELIM
       EOF
       UNKNOWN
     end
