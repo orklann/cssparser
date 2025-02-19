@@ -23,6 +23,7 @@ module CssParser
       CLOSING_SQUARE_BRACKET
       COMMENT
       FUNCTION
+      INCLUDES
       EOF
       UNKNOWN
     end

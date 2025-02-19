@@ -588,6 +588,12 @@ module CssParser
         set_current_pos(start_pos)
         scan_comment
         @token.value = string_range(start_pos)
+      when '~'
+        if next_char == '='
+          next_char
+          @token.type = :INCLUDES
+          @token.value = string_range(start_pos)
+        end
       end
       @token
     end
