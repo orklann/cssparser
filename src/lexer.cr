@@ -242,6 +242,36 @@ module CssParser
       return false
     end
 
+    def scan_comment
+      char = current_char
+      if char == '/' && next_char == '*'
+        char = next_char
+        while char != '*'
+          char = next_char
+        end
+        # Here we are sure char is matched to '*' already
+        char = next_char
+        while char == '*'
+          char = next_char
+        end
+
+        while !char.in?("/*")
+          char = next_char
+          while char != '*'
+            char = next_char
+          end
+          char = next_char
+          while char == '*'
+            char = next_char
+          end
+        end
+        if char == '/'
+          next_char
+          @token.type = :COMMENT
+        end
+      end
+    end
+
     def scan_s
       char = current_char
       if char.in?(" \t\r\n\f")
@@ -524,6 +554,10 @@ module CssParser
       when ']'
         next_char
         @token.type = :CLOSING_SQUARE_BRACKET
+        @token.value = string_range(start_pos)
+      when '/'
+        set_current_pos(start_pos)
+        scan_comment
         @token.value = string_range(start_pos)
       end
       @token

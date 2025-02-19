@@ -481,5 +481,29 @@ module CssParser
       token.type.should eq(Token::Kind::CLOSING_SQUARE_BRACKET)
       token.value.should eq("]")
     end
+
+    it "return COMMENT token" do
+      lexer = Lexer.new("/*a comment*/")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::COMMENT)
+      token.value.should eq("/*a comment*/")
+
+      lexer = Lexer.new("/*a * comment***/")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::COMMENT)
+      token.value.should eq("/*a * comment***/")
+
+      lexer = Lexer.new("/*a * \ncomment***/")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::COMMENT)
+      token.value.should eq("/*a * \ncomment***/")
+
+      # Nested comment parts is valid, since the regular expression does
+      # not handle nested comment properly, so we think it's valid, but rare.
+      lexer = Lexer.new("/*a /*comment*/")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::COMMENT)
+      token.value.should eq("/*a /*comment*/")
+    end
   end
 end

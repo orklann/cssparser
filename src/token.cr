@@ -21,6 +21,7 @@ module CssParser
       CLOSING_PARENTHESIS
       SQUARE_BRACKET
       CLOSING_SQUARE_BRACKET
+      COMMENT
       EOF
       UNKNOWN
     end
