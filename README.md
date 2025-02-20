@@ -1,6 +1,6 @@
 # cssparser
 
-This parser is based on the [CSS 2.1 specification](https://www.w3.org/TR/CSS2/)
+This parser is based on the [CSS Syntax Module Level 3](https://www.w3.org/TR/css-syntax-3/)
 
 ## Installation
 
