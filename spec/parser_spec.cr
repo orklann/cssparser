@@ -3,9 +3,8 @@ require "./spec_helper.cr"
 module CssParser
   describe Parser do
     it "create new parser" do
-      lexer = Lexer.new("")
-      parser = Parser.new(lexer)
-      parser.lexer.should eq(lexer)
+      parser = Parser.new("font-name")
+      parser.lexer.class.name.should eq("CssParser::Lexer")
     end
   end
 end
