@@ -46,5 +46,18 @@ module CssParser
         end
       end
     end
+
+    it "parse square block node" do
+      parser = Parser.new("[14pt]")
+      node = parser.parse_square_block
+      case node
+      when SquareBlockNode
+        value = node.value[0].value
+        case value
+        when Token
+          value.value.should eq("14pt")
+        end
+      end
+    end
   end
 end
