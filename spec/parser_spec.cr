@@ -15,8 +15,8 @@ module CssParser
         value = ast.value
         case value
         when Token
-          ast.value.class.name.should eq("CssParser::Token")
-          ast.value.value.should eq("14pt")
+          value.class.name.should eq("CssParser::Token")
+          value.value.should eq("14pt")
         end
       end
     end
@@ -26,9 +26,24 @@ module CssParser
       node = parser.parse_curly_block
       case node
       when CurlyBlockNode
-        value = node.value[0]
-        value.class.name.should eq("CssParser::ComponentValueNode")
-        value.value.value.should eq("14pt")
+        value = node.value[0].value
+        case value
+        when Token
+          value.value.should eq("14pt")
+        end
+      end
+    end
+
+    it "parse parenthesis block node" do
+      parser = Parser.new("(14pt)")
+      node = parser.parse_parenthesis_block
+      case node
+      when ParenthesisBlockNode
+        value = node.value[0].value
+        case value
+        when Token
+          value.value.should eq("14pt")
+        end
       end
     end
   end

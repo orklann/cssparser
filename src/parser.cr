@@ -38,5 +38,26 @@ module CssParser
       end
       return nil
     end
+
+    def parse_parenthesis_block
+      token = @lexer.next_token_copy
+      if token.type == Token::Kind::PARENTHESIS
+        component_values = Array(ComponentValueNode).new
+        while true
+          saved_pos = @lexer.current_pos
+          token = @lexer.next_token_copy
+          if token.type != Token::Kind::CLOSING_PARENTHESIS
+            @lexer.set_current_pos(saved_pos)
+            value = parse_component_value.not_nil!
+            component_values.push(value)
+          else
+            break
+          end
+        end
+        node = ParenthesisBlockNode.new(component_values)
+        return node
+      end
+      return nil
+    end
   end
 end
