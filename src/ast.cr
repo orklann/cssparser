@@ -12,5 +12,12 @@ module CssParser
     def initialize(@ident_token, @componet_value)
     end
   end
+
+  class ComponentValueNode < ASTNode
+    property value : Token
+
+    def initialize(@value)
+    end
+  end
 end
 
