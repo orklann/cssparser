@@ -608,6 +608,10 @@ module CssParser
       @token
     end
 
+    def next_token_copy
+      next_token.copy
+    end
+
     def current_char
       @reader.current_char
     end

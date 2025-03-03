@@ -38,6 +38,13 @@ module CssParser
       @value = nil
     end
 
+    def copy
+      token = Token.new
+      token.type = @type
+      token.value = @value
+      token
+    end
+
     def preserved?
       if @type != Kind::FUNCTION && @type != Kind::CURLY_BRACKET && \
           @type != Kind::PARENTHESIS && @type != Kind::SQUARE_BRACKET
