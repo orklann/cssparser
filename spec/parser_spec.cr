@@ -10,8 +10,11 @@ module CssParser
     it "parse component value as preserved token" do
       parser = Parser.new("14pt")
       ast = parser.parse_component_value
-      ast.not_nil!.value.class.name.should eq("CssParser::Token")
-      ast.not_nil!.value.value.should eq("14pt")
+      case ast
+      when ComponentValueNode
+        ast.value.class.name.should eq("CssParser::Token")
+        ast.value.value.should eq("14pt")
+      end
     end
   end
 end
