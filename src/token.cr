@@ -37,5 +37,14 @@ module CssParser
       @type = Kind::UNKNOWN
       @value = nil
     end
+
+    def preserved?
+      if @type != Kind::FUNCTION && @type != Kind::CURLY_BRACKET && \
+          @type != Kind::PARENTHESIS && @type != Kind::SQUARE_BRACKET
+        return true
+      else
+        return false
+      end
+    end
   end
 end

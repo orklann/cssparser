@@ -12,5 +12,31 @@ module CssParser
       token.type = :IDENT
       token.type.should eq(Token::Kind::IDENT)
     end
+
+    it "checks preserved token" do
+      token = Token.new
+      token.type = :FUNCTION
+      token.preserved?.should be_false
+
+      token = Token.new
+      token.type = :SQUARE_BRACKET
+      token.preserved?.should be_false
+
+      token = Token.new
+      token.type = :PARENTHESIS
+      token.preserved?.should be_false
+
+      token = Token.new
+      token.type = :CURLY_BRACKET
+      token.preserved?.should be_false
+
+      token = Token.new
+      token.type = :S
+      token.preserved?.should be_true
+
+      token = Token.new
+      token.type = :IDENT
+      token.preserved?.should be_true
+    end
   end
 end
