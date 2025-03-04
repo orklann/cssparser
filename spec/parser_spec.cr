@@ -94,7 +94,7 @@ module CssParser
     end
 
     it "parse function block node" do
-      parser = Parser.new("(14pt)")
+      parser = Parser.new("repeat(14pt)")
       node = parser.parse_function_block
       case node
       when FunctionBlockNode
@@ -105,14 +105,14 @@ module CssParser
         end
       end
 
-      parser = Parser.new("((14pt)")
+      parser = Parser.new("repeat((14pt)")
       node = parser.parse_function_block
       case node
       when FunctionBlockNode
         node.value.size.should eq(0)
       end
 
-      parser = Parser.new("(14pt")
+      parser = Parser.new("repeat(14pt")
       node = parser.parse_function_block
       node.should eq(nil)
     end

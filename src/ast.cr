@@ -48,8 +48,9 @@ module CssParser
   class FunctionBlockNode < ASTNode
     # value for componet_value array
     property value : Array(ComponentValueNode)
+    property ident : Token
 
-    def initialize(@value)
+    def initialize(@ident, @value)
     end
   end
 end
