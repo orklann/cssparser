@@ -39,6 +39,10 @@ module CssParser
       when CurlyBlockNode
         node.value.size.should eq(0)
       end
+
+      parser = Parser.new("{14pt")
+      node = parser.parse_curly_block
+      node.should eq(nil)
     end
 
     it "parse parenthesis block node" do
@@ -59,6 +63,10 @@ module CssParser
       when ParenthesisBlockNode
         node.value.size.should eq(0)
       end
+
+      parser = Parser.new("(14pt")
+      node = parser.parse_parenthesis_block
+      node.should eq(nil)
     end
 
     it "parse square block node" do
@@ -79,6 +87,10 @@ module CssParser
       when SquareBlockNode
         node.value.size.should eq(0)
       end
+
+      parser = Parser.new("[14pt")
+      node = parser.parse_square_block
+      node.should eq(nil)
     end
 
     it "parse function block node" do
@@ -99,6 +111,10 @@ module CssParser
       when FunctionBlockNode
         node.value.size.should eq(0)
       end
+
+      parser = Parser.new("(14pt")
+      node = parser.parse_function_block
+      node.should eq(nil)
     end
   end
 end

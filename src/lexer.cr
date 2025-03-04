@@ -467,6 +467,11 @@ module CssParser
       start_pos = current_pos
       char = current_char
 
+      if char == '\0'
+        @token.type = :EOF
+        return @token
+      end
+
       scan_s
       if @token.type != Token::Kind::S
         set_current_pos(start_pos)

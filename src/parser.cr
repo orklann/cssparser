@@ -25,6 +25,9 @@ module CssParser
         while true
           saved_pos = @lexer.current_pos
           token = @lexer.next_token_copy
+          if token.type == Token::Kind::EOF
+            return nil
+          end
           if token.type != Token::Kind::CLOSING_CURLY_BRACKET
             @lexer.set_current_pos(saved_pos)
             value = parse_component_value
@@ -50,6 +53,9 @@ module CssParser
         while true
           saved_pos = @lexer.current_pos
           token = @lexer.next_token_copy
+          if token.type == Token::Kind::EOF
+            return nil
+          end
           if token.type != Token::Kind::CLOSING_PARENTHESIS
             @lexer.set_current_pos(saved_pos)
             value = parse_component_value
@@ -75,6 +81,9 @@ module CssParser
         while true
           saved_pos = @lexer.current_pos
           token = @lexer.next_token_copy
+          if token.type == Token::Kind::EOF
+            return nil
+          end
           if token.type != Token::Kind::CLOSING_SQUARE_BRACKET
             @lexer.set_current_pos(saved_pos)
             value = parse_component_value
@@ -99,6 +108,9 @@ module CssParser
         component_values = Array(ComponentValueNode).new
         while true
           char = @lexer.peek_next_char
+          if char == '\0'
+            return nil
+          end
           if char != ')'
             value = parse_component_value
             if value == nil
