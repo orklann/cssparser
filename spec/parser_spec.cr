@@ -32,6 +32,13 @@ module CssParser
           value.value.should eq("14pt")
         end
       end
+
+      parser = Parser.new("{{}")
+      node = parser.parse_curly_block
+      case node
+      when CurlyBlockNode
+        node.value.size.should eq(0)
+      end
     end
 
     it "parse parenthesis block node" do
@@ -44,6 +51,13 @@ module CssParser
         when Token
           value.value.should eq("14pt")
         end
+      end
+
+      parser = Parser.new("({)")
+      node = parser.parse_parenthesis_block
+      case node
+      when ParenthesisBlockNode
+        node.value.size.should eq(0)
       end
     end
 
@@ -58,6 +72,13 @@ module CssParser
           value.value.should eq("14pt")
         end
       end
+
+      parser = Parser.new("[[14pt]")
+      node = parser.parse_square_block
+      case node
+      when SquareBlockNode
+        node.value.size.should eq(0)
+      end
     end
 
     it "parse function block node" do
@@ -70,6 +91,13 @@ module CssParser
         when Token
           value.value.should eq("14pt")
         end
+      end
+
+      parser = Parser.new("((14pt)")
+      node = parser.parse_function_block
+      case node
+      when FunctionBlockNode
+        node.value.size.should eq(0)
       end
     end
   end

@@ -27,8 +27,12 @@ module CssParser
           token = @lexer.next_token_copy
           if token.type != Token::Kind::CLOSING_CURLY_BRACKET
             @lexer.set_current_pos(saved_pos)
-            value = parse_component_value.not_nil!
-            component_values.push(value)
+            value = parse_component_value
+            if value == nil
+              break
+            else
+              component_values.push(value.not_nil!)
+            end
           else
             break
           end
@@ -48,8 +52,12 @@ module CssParser
           token = @lexer.next_token_copy
           if token.type != Token::Kind::CLOSING_PARENTHESIS
             @lexer.set_current_pos(saved_pos)
-            value = parse_component_value.not_nil!
-            component_values.push(value)
+            value = parse_component_value
+            if value == nil
+              break
+            else
+              component_values.push(value.not_nil!)
+            end
           else
             break
           end
@@ -69,8 +77,12 @@ module CssParser
           token = @lexer.next_token_copy
           if token.type != Token::Kind::CLOSING_SQUARE_BRACKET
             @lexer.set_current_pos(saved_pos)
-            value = parse_component_value.not_nil!
-            component_values.push(value)
+            value = parse_component_value
+            if value == nil
+              break
+            else
+              component_values.push(value.not_nil!)
+            end
           else
             break
           end
@@ -88,8 +100,12 @@ module CssParser
         while true
           char = @lexer.peek_next_char
           if char != ')'
-            value = parse_component_value.not_nil!
-            component_values.push(value)
+            value = parse_component_value
+            if value == nil
+              break
+            else
+              component_values.push(value.not_nil!)
+            end
           else
             break
           end
