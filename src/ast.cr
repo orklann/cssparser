@@ -22,6 +22,7 @@ module CssParser
   end
 
   class CurlyBlockNode < ASTNode
+    # value for componet_value array
     property value : Array(ComponentValueNode)
 
     def initialize(@value)
@@ -29,6 +30,7 @@ module CssParser
   end
 
   class ParenthesisBlockNode < ASTNode
+    # value for componet_value array
     property value : Array(ComponentValueNode)
 
     def initialize(@value)
@@ -36,6 +38,7 @@ module CssParser
   end
 
   class SquareBlockNode < ASTNode
+    # value for componet_value array
     property value : Array(ComponentValueNode)
 
     def initialize(@value)
@@ -43,6 +46,7 @@ module CssParser
   end
 
   class FunctionBlockNode < ASTNode
+    # value for componet_value array
     property value : Array(ComponentValueNode)
 
     def initialize(@value)
