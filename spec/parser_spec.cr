@@ -33,7 +33,7 @@ module CssParser
         end
       end
 
-      parser = Parser.new("{{}")
+      parser = Parser.new("{(}")
       node = parser.parse_curly_block
       case node
       when CurlyBlockNode
