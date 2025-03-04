@@ -80,5 +80,24 @@ module CssParser
       end
       return nil
     end
+
+    def parse_function_block
+      token = @lexer.next_token_copy
+      if token.type == Token::Kind::FUNCTION
+        component_values = Array(ComponentValueNode).new
+        while true
+          char = @lexer.peek_next_char
+          if char != ')'
+            value = parse_component_value.not_nil!
+            component_values.push(value)
+          else
+            break
+          end
+        end
+        node = FunctionBlockNode.new(component_values)
+        return node
+      end
+      return nil
+    end
   end
 end

@@ -15,7 +15,7 @@ module CssParser
 
   class ComponentValueNode < ASTNode
     property value : Token | CurlyBlockNode | ParenthesisBlockNode \
-                     | SquareBlockNode
+                     | SquareBlockNode | FunctionBlockNode
 
     def initialize(@value)
     end
@@ -36,6 +36,13 @@ module CssParser
   end
 
   class SquareBlockNode < ASTNode
+    property value : Array(ComponentValueNode)
+
+    def initialize(@value)
+    end
+  end
+
+  class FunctionBlockNode < ASTNode
     property value : Array(ComponentValueNode)
 
     def initialize(@value)

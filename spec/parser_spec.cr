@@ -59,5 +59,18 @@ module CssParser
         end
       end
     end
+
+    it "parse function block node" do
+      parser = Parser.new("(14pt)")
+      node = parser.parse_function_block
+      case node
+      when FunctionBlockNode
+        value = node.value[0].value
+        case value
+        when Token
+          value.value.should eq("14pt")
+        end
+      end
+    end
   end
 end
