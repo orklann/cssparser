@@ -53,5 +53,10 @@ module CssParser
     def initialize(@ident, @value)
     end
   end
+
+  class ImportantNode < ASTNode
+    def initialize
+    end
+  end
 end
 

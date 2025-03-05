@@ -131,5 +131,28 @@ module CssParser
       end
       return nil
     end
+
+    def parse_important
+      if @lexer.current_char == '!'
+        @lexer.next_char
+        token = @lexer.next_token_copy
+        while token.type == Token::Kind::S
+          token = @lexer.next_token_copy
+        end
+        if token.type == Token::Kind::IDENT && token.value == "important"
+          saved_pos = @lexer.current_pos
+          token = @lexer.next_token_copy
+          while token.type == Token::Kind::S
+            saved_pos = @lexer.current_pos
+            token = @lexer.next_token_copy
+          end
+          @lexer.set_current_pos(saved_pos)
+          return ImportantNode.new
+        else
+          return nil
+        end
+      end
+      return nil
+    end
   end
 end

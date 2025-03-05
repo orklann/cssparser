@@ -116,5 +116,14 @@ module CssParser
       node = parser.parse_function_block
       node.should eq(nil)
     end
+
+    it "parse !important node" do
+      parser = Parser.new("!important !important ")
+      node = parser.parse_important
+      node.class.name.should eq("CssParser::ImportantNode")
+
+      node = parser.parse_important
+      node.class.name.should eq("CssParser::ImportantNode")
+    end
   end
 end
