@@ -204,7 +204,6 @@ module CssParser
       token = lexer.next_token
       token.type.should eq(Token::Kind::STRING)
 
-
       lexer = Lexer.new("'ABC'")
       token = lexer.next_token
       token.type.should eq(Token::Kind::STRING)
@@ -216,6 +215,11 @@ module CssParser
       lexer = Lexer.new("'\\\n\\\r\\\f\\\r\n'")
       token = lexer.next_token
       token.type.should eq(Token::Kind::STRING)
+
+      lexer = Lexer.new("\"Times Roman\"")
+      token = lexer.next_token
+      token.type.should eq(Token::Kind::STRING)
+      token.value.should eq("Times Roman")
     end
 
     it "match name" do

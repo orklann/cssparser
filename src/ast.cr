@@ -7,9 +7,10 @@ module CssParser
 
   class DeclarationNode < ASTNode
     property ident_token : Token
-    property componet_value : Token
+    property component_values : Array(ComponentValueNode)
+    property important : Bool
 
-    def initialize(@ident_token, @componet_value)
+    def initialize(@ident_token, @component_values, @important)
     end
   end
 
