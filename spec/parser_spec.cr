@@ -140,6 +140,7 @@ module CssParser
         when Token
           token.value.should eq("Times Roman")
         end
+        node.important.should be_false
       end
 
       parser = Parser.new("font-family: \"Times Roman\" !important")
